@@ -1,0 +1,73 @@
+Administración y seguridad de la información
+
+Estructura de directorios en entorno gráficos (nombres largos)
+
+A partir de windows 95 es posible utilizar nombres que se "saltan" algunas de las restricciones de construcción de nombres de archivos de DOS (formato 8.3). Este nuevo formato de nombres aparece en los manuales de microsoft bajo el nombe "Long File Names"(nombres de ficheros largos).
+
+Un nombre de fichero es LARGO, si cumple alguna de las siguientes características:
+	1.- Tiene más de 8 posiciones en el nombre.
+		resumen2008.doc
+	2.- y/o tiene más de 3 posiciones en la extensión.
+		resumen.2010
+	3.- y/o contiene espacios en blanco o algún carácter no válido en nombres cortos.
+		memoria curso 0910.doc
+		c++.txt
+
+La longitud máxima para un nombre de archivo es de 255 caracteres.
+La longitud máxima de un nombre completo (es decir, incluyendo letra de unidad y ruta absoluta) de archivo o directorio que el sistema operativo puede manejar es de 260 caracteres. Por lo tanto no podemos poner un archivo LARGO en cualquier directorio, hemos que tener en cuenta la longitud total.
+
+Observar los siguientes casos:
+	- Office
+	- Descompresión paquetes Winrar ...
+	- Nero (108), Quicktime (63), ...
+
+Actualmente hay algunas versiones de w10 (importante, no todas las versiones de Windows 10) que permiten más de 260 caracteres. (gpedit.msc contiene una directiva que nos permite subir la limitación de caracteres)
+
+Se reduce el número de caracteres prohibidos. ahora únicamente NO pueden utilizarse:
+	< > : " / \ | ? *
+
+Observar que se pueden utilizar espacios en blanco, se pueden poner más de 1 punto dentro del nombre, ...
+
+Siguen sin poderse utilizar como nombres de archivo, las siguientes palabras reservadas:
+	CON, PRN, AUX, NUL,
+	COM1, COM2, COM3, COM4, COM5, COM6,
+	COM7, COM8, COM9,
+	LPT1, LPT2, LPT3, LPT4, LPT5, LPT6,
+	LPT7, LPT8, LPT9.
+
+En la consola de comandos, los espacios en blanco son utilizados como separadores de órdenes y argumentos.
+Podemos utilizar los nombres largos en la consola de comandos, encerrando el nombre entre comillas ("").
+	H:\> COPY "H:\documentos\apuntes iso.pdf"
+	H:\> COPY H:\documentos\apuntes iso.pdf  (intentaria copiar un archivo apuntes sin extensión a raíz poniéndole como nombre iso.pdf)
+
+Cada vez que se genera un nombre largo, Windows genera automáticamente un noombre corto (8.3 alias) ya que las aplicaciones diseñadas para entornos DOS no reconocen, lógicamente, estos nombres largos.
+
+Se trata pues de un tema de compatibilidad, que aunque pueda parecer imposible, hoy en dia todavíaes necesario.
+(p.e. Contaplus, programa de contabilidad, ...)
+
+Para crear un nombre corto a partir de un nombre largo: 
+	1º Se suprimen todos los "espacios en blanco" y alguno caracteres (como p.e. vocales acentuadas)
+	2º Se suprimen todos los "." extras, excepto el último "."
+	3º Los caracteres no permitidos en 8.3 (y no blancos) son sustituidos por "_"
+	4º La extensión se trunca a los 3 o mnos primeros caracteres después del "."
+	5º Se cogen (truncar) los 6 primeros caracteres y se les añade detrás el carácter "~" (alt 126) seguido de un nº (1..9).
+	6º Se traducen todos los caracteres a mayúsculas.
+
+Ejemplo1:
+	This is a really long filename.123.456.docx
+	Thisisareallylongfilename.123.456.docx
+	Thisisareallylongfilename123456.docx
+	Thisisareallylongfilename123456.doc
+	Thisis~1.doc
+
+Ejercicios:
+	Carta al banco.doc
+	Carta a Cristina.doc
+	Carta al banco
+	Factura.doc
+	Factura.Gastos de viaje
+	Factura.Gastos de viaje.Enero
+	Factura.Comidas.Enero
+	FS1.html
+	C++.exe
+	THISIS~1.doc

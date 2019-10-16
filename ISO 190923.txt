@@ -1,0 +1,28 @@
+Sistemas Informáticos: Conjunto de recursos(físicos, lógicos i humanos) que resuelven las necesidades de obtención, proceso, almacenamiento y distribución de información de un usuario (S.I. Monousuario) o un grupo de usuarios (S.I. Multiusuario) utilizando medios informáticos.
+
+- Recursos físicos(HARDWARE)
+- Recursos Lógicos(SOFTWARE)
+- Recursos Humanos(USERS)
+
+Sistema Operativo: Conjunto de programas que permiten a los usuarios utilizar, compartir y competir por los recursos físicos y lógicos de un sistema informático.
+
+Usuarios:
+
+- Usuario Final: (Necesidades y funciones) > Utilizan herramientas informáticas para desarrollar su función (no informática) dentro de la empresa. (Herramientas y conocimientos) > Hrramientas ofimáticas, programas de CAD, contabilidad, diseño gráfico...
+
+- Usuario Programador: (Necesidades y funciones) > Desarrollo de herramientas para el resto de usuarios. (Herramientas y conocimientos) > Software de programación, editores, compiladores, generadores de código,...
+
+- Usuario Administrador: (Necesidades y funciones) > Administran el sistema, Instalar y mantener los recursos, Implantar medidas de seguridad, Formación de usuarios, Resolución de problemas, Relación con usuarios y proveedores... (Herramientas y conocimientos) > Sistemas Operativos, drivers, utilidades de evaluación del sistema,...
+
+Ejemplo1
+
+>USUARIO FINAL --> Utilización del sistema
+
+>USUARIO ADMINISTRADOR --> Instalación y coniguración del programa (Instalaciones personalizadas, Conflictos con otros programas (dll's compartidas,...), Utilización por parte de usuarios limitados). Actualizaciones (Configuración, descarga e instalación, Compatibilidad con versiones anteriores). Formación de usuarios.
+
+Ejemplo2
+
+>USUARIO FINAL --> Borrado de un fichero le está dando problemas
+
+> ADMINISTRADOR --> Resolver el problema que se le plantee al USUARIO FINAL. Deducir / Razonar qué puede estar pasando (Soporte físico, Soporte protegido físicamente, fichero abierto por otra aplicación, Fichero protegido (atributos), permisos usuario,...)
+

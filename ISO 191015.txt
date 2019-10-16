@@ -1,0 +1,40 @@
+Long file name:                 Short File Name:              Short File Name:
+	This is test 2.txt               THISIS~1.TXT       	  THISIS~1.TXT
+	This is test 3.txt               THISIS~2.TXT       	  THISIS~1.TXT
+	This is test 1.txt               THISIS~3.TXT      	  THISIS~1.TXT
+	This is test 5.txt               THISIS~4.TXT             THISIS~1.TXT
+	This is test 6.txt               THISIS~5.TXT             THA1CA~1.TXT
+	This is test 7.txt               THISIS~6.TXT	          THA1CE~1.TXT
+
+Actualmente podemos consultar los nombres cortos únicamente desde el entorno texto mediante: DIR /x. En versiones antrioes, como p.e: Windows9x, el nombre corto aparecía también en la hoja de Propiedades del archivo / directorio. La generación de nombres cortos puede desactivarse para mejorar el e¡rendimiento del sistema. Parece ser únicamente posible en sistemas NTFS y es necesario editar el Registro de Windows, o bien emplear la utilidad de línea de comando fsutil 8dot3name.
+
+La estructura de directorios resultante tras la instalación de un sistema operativo Windows Vista, Windows 7, Windows 8, Windows 10 y Windows 2008 Server, difiere notablemente de la estructura de directorios que sostenía el funcionamiento de los sistemas operativos anteriores Windows XP y Windows 2003 Server.
+
+Podemos observar estas diferencias por ejemplo en la subestructura de directorios en la que se almacenan los perfiles de cada usuario.
+
+Windows XP								Windows Vista - Windows 7
+W2003 Server								Windows 2008 Server
+
+U:\Documents and Settings						U:\Users
+U:\Documents and Settings\ASIX\Application Data				U:\Users\ASIX\AppData\Roaming
+U:\Documents and Settings\ASIX\Local Settings				U:\Users\ASIX\AppData\Local
+
+Así pues, la instalación de programas diseñados para Windows XP en Windows Vista, Windows 7 o Windows 2008 Server presentaría problemas a la hora  de colocar archivos en rutas esperadas (p.e. en Application Data o en Local Settings).
+
+¿Cuál es la solución? A partir de Windows Vista, cada perfil de usuario contiene, además de directorios, elementos de compatibilidad (cambios de dirección) que redirigen los nombres de carpeta en Windows XP a los nombres adecuados como se utilizan en Windows Vista, Windows 7 y Windows 2008 Server. Estos elementos de compatibilidad se consiguen utilizando puntos de unión (junctions o puntos de análisis).
+
+Estos elementos en un principio estan ocultos, no se ven. Desde el entorno gráfico presentan el mismo aspecto (icono) que un acceso directo (y no presentan ninguna inormación sobre su destino). No podemos acceder a ellos. Es la forma que tiene Windows de impedir que se manipule la infraestructura de compatibilidad. Esta protección no es del todo segura ya que no se impide que se puedan eliminar estos junction.
+
+Para ver todos los puntos de naálisis:
+	C:\> DIR /al /s
+
+En el entorno gráfico los directorios normalmente son representados por un icono de carpeta. podemos personalizar la apariencia de un directorio en el entorno gráfico, gracias a los ficheros desktop.ini
+
+En un fichero desktop.ini podemos personalizar:
+	- Icono
+	- Infotip
+	- Nombre ...
+
+Las carpetas documentos, mis imágenes, ... que vemos en el entorno gráfico dentro de un perfil de usuario son realmente carpetas de nombre documents, pictures, ... cuyo fichero desktop.ini hace que en el entorno se vean con otro nombre.
+
+Una biblioteca reúne archivos de distintas ubicaciones y los muestra como una única colección, sin moverlos del lugar donde están almacenados. Se configuran por usuario y están definidas en un archivo de configuración XML, con la extensión .library-ms

@@ -1,0 +1,162 @@
+Introduccion a las estructuras de directorios
+
+Una de las funciones del S.O. es permitir al usuario guardar información en medios de almacenamiento y permitir los posteriores accesos a esta información almacenada.
+
+Pare ello se dota a los medios de almacenamiento de una estructura lógica llamada SISTEMA DE ARCHIVOS que puede variar según el tipo de medio y sistema opertivo (FAT, NTFS, CDFS, ext2, ...) que a nivel usuario se muestra como una ESTRUCTURA DE DIRECTORIOS.
+
+El objtivo es permitir al usuario un manejo fácil y lógico de sus archivos, abstrayéndose de las particularidades de los dispositivos fíicos empleados. (El S.O. nos permite acceder a la información de uno u otro dispositivo mediante un tipo de estructura idéntico). Se muestra en forma de arbol de carpetas para el fácil entendimientio del usuario.
+
+Una ESTRUCTURA DE DIRECTORIOS es una estructura en forma de árbol invertido (árbol de directorios), que puede presentar diferencias en un S.O. u otro. Con el fin de favorecer la comprensión empezaremos estudiando con S.O. Microsoft y más adelante veremos sus equivalencias y diferencias con entornos Unix-Linux.
+
+ESTRUCTURA DE DIRECTORIOS EN ENTORNOS MICROSOFT
+
+Tiene sus origenes n su primer sistema operativo MS-DOS y ha ido manteniéndose (mantener ompatibilidad) y evolucionando (introducción de mejoras) hasta llegar al Windows 10 actual. El DOS es un sistema operativo |modo orden|. "Disc Operating System". Diseñado especialmente para la gestión de los datos del disco. En un principio, la mayoría de ordenes estaban enfocadas a la organizacion de los dato sobre discos.
+
+Para este propósito (organizar los datos en los discos (unidad física)), el DOS utiliza una estructura arborescente basada en:
+
+-Unidades: El DOS inicialmente representa las unidades físicas de disco mediant letras(A...Z) seguidas de dos puntos.
+
+|letra A:| representa 1ª unidad física de disquetes.
+|letra B:| representa 2ª unidad física de disquetes.
+|letra C:| representa el primer disco duro.
+|letra D: ... Z:| representan discos duros, CD-ROM, discos ZIP, Pen Drives, unidades de red, ...
+
+-Directorios: Son elementos que responden a la necesidad de organizar de alguna forma la gran cantidad de archivos o ficheros que suele haber en un volumen. La regla de contrucción del nombre de directorio es la misma que la de un archivo.
+
+-Ficheros: Son los elementos de la estructura arborescente que representan los datos que el usuario tiene almacenados en un volumen. Así, por ejemplo, si un usuario tiene almacenado un gráfico, todos los 1's y 0's que componen esta información están represenados por un niombre que lo identifica dentro del sistema. Es el |nombre de fichero|.
+
+En DOS este nombre está formado por tres partes: nombre (1 a 8) + "." + extensión(0 a 3).
+*Caracteres prohibidos: espacio , . < > + - \ / ? * | : ;
+
+Notación: arg               ---        Significado: Obligatorio
+Notación: {arg1 | arg2}     ---        Significado: Obligatorio 1 de los 2
+Notación: [arg]             ---        Significado: Opcional
+Notación: [arg1 | arg2]     ---        Significado: Opcional 1 de los 2
+
+UNIDAD ACTIVA Y DIRECTORIO ACTIVO
+
+Representan la posición del usuario dentro de las estructuras de directorios. Para ello, el sistema mantiene un apuntador de unidad (|unidad actual| o |activa|). Para cada unidad, un apuntador de directorio actual o de trabajo (|directorio activo|).
+
+*Flecha contínua: directorio activo
+*Flecha discontínua: unidad activa
+
+NOBRE COMPLETO DE UN ARCHIVO O DIRECTORIO
+
+Todo archivo o directorio ha de tener un nombre que lo identifique de manera única dentro del sistema. Este nombre único está formado por:
+
+	Letra_unidad: ruta nombre_archivo
+	Letra_unidad: ruta nombre_directorio
+
+RUTAS DE ACCESO O TRAYECTORIAS
+
+Una |ruta de acceso| es un nombre que designa la posición de un fichero o un directorio en una estructura de directorios d una unidad lógica. Podemos distinguir dos tipos de rutas:
+
+	|Rutas absolutas|: especificadas desde la raiz (empiean con el carácter \).
+	|Rutas relativas|: especificadas desde el directorio activo.
+
+Carácter: "." --> Representa: Directorio actual
+Caácter: ".."     Directorio padre
+Carácter: "\"    Directorio raíz
+Carácter: "\"    Separador de niveles(carpetas)
+
+EJEMPLO1 RUTAS:   (Flecha discontinua en C:\ y contínuas en asix y entr d1 y d1)
+
+	         utilizando rutas absolutas           utilizando rutas relativas
+
+	1        C:\users\asix\pictures\camara        C:\pictures camara o C:.\pictures\camara
+	2        C:\users\batx                        C:..\batx o C:.\..\batx
+	3        C:\windows\system32                  C:..\..\windows\system32 o C:.\..\..\windows\system32
+
+El S.O. siempre que trbaaje con archivos y directorios ha de poder identificarlos de forma única. Para el usuario puede resultar incómoda la utilización de nombres completos muy largos. Podrá simplificar la especificación de un nombre de archivo o directorio combinando los conceptos:
+
+	Unidad activa y directorio activo
+	Rutas absolutas/rutas relativas.
+
+De cara al usuario el nombre completo que inicialmente especificábsmos como:
+
+	Letra_unidad: ruta nombre_archivo      (CADA COSA DE 1 COLOR)
+
+Es en realidad:
+
+	[Letra_unidad:][ruta_absoluta|ruta_relativa] nombre_archivo     (CADA COSA DE 1 COLOR)
+
+	Si el usuario utiliza...          El S.O. utiliza...
+
+	Letra_unidad                      Letra unidad
+	Nada                              La unidad activa
+
+	Ruta absoluta                     ruta absoluta
+	Ruta relativa                     RA de directorio_activo(de unidad deducida por S:O.) + "\" + ruta relativa
+	Nada                              RA de directorio_activo(de unidad deducida por S.O.)
+
+Dependiendo del contexto y de la orden utilizada
+
+	[Letra_unidad:][ruta_absoluta|ruta_relativa][nombre_archivo]     (CADA COSA DE 1 COLOR)
+
+EJEMPLO2 RUTAS:
+
+	C:\users\asix\pictures\foto.jpg
+
+		pictures\foto.jpg
+
+	C:\users\asix + \ + pictures\foto.jpg     (RA de directorio_activo(de unidad deducida por S:O.) + "\" + ruta relativa)
+
+		C:pictures\foto.jpg   (no es la solución óptima)
+
+	C:\users\asix + \ + pictures\foto.jpg
+
+		C:users\asix\pictures\foto.jpg    (solución no válida)
+	
+	C:\users\asix + \ + users\asix\pictures\foto.jpg
+
+
+
+	C:\users\asix\documents
+
+		documents
+
+	C:\users\asix + \ + documents
+
+		\documents	(solución no válida)
+
+	C:\documents	
+
+		.\documents  (solución no óptima)
+
+	C:\users\asix + \ + .\documents
+
+
+
+	H:\d1\d11\fitx1.txt
+
+		H:d11\fitx1.txt
+
+	H:\d1 + \ + d11\fitx1.txt
+
+		d11\fitx.txt (solución no válida)
+
+	C:users\asix + \ + d11\fitx1.txt
+
+		..\d11\fitx1.txt (solución no válida)
+
+	C:\users\asix\..\d11\fitx1.txt
+
+		H:fitx1.txt (solución no válida)
+
+	H:\d1\fitx1.txt
+
+	
+
+	H:\d1
+
+		H:
+
+	H:\d1
+
+		H:.    (solución no óptima)
+
+	H:\d1 + \ + .
+
+		d1     (solución no válida)
+
+	C:\users\asix\d1

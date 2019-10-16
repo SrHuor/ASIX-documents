@@ -1,0 +1,64 @@
+Ordenes de consola para la gestion de arboles de directorios (Administración y seguridad de la información)
+
+PROMPT es un elemento indicador, que utilizan muchos entornos (dBase, AutoCAD, ...), para informar al usuario de la disponibilidad del sistema para recibir una orden. El usuario sabe cuando introducir una orden ya que se lo informa la consola.
+
+DOS y la consola de comandos de Windows (programa Símbolo del sistema) utilizan prmpt, (configurable por el usuario), que en principio cuando aparece indica cual es la unidad activa y el directorio activo de esta unidad.
+
+Cambiar de unidad activa =>
+				Letra_unidad: + RETURN
+
+Crear un archivo =>
+				COPY CON [unidad:][ruta]nombrearchivo + RETURN
+				...
+				...
+			    F6  ^z
+				     1 archivo copiado
+
+
+Visualizar contenido archivo =>
+				TYPE [unidad:][ruta]nombrearchivo + RETURN
+
+
+Creación directorio =>
+				MD [unidad:]ruta + RETURN
+
+
+Cambiar directorio activo =>
+				CD [unidad:][ruta] + RETURN
+								(si ponemos solo CD + RETURN nos dice el directorio activo actual)
+								(si ponemos CD [unidad no activa:] nos dice su directorio activo)
+
+
+Visualizar contenido directorio =>
+				DIR [unidad:][ruta][nombrearchivo]
+								(solo nos dice si el archivo se encuentra o no en la ruta especificada)
+
+
+Comodines: Caracteres especiales que utilizados en un nombre de archivo, permiten identificar a más de un archivo.
+				(*> más de 1 carácter  ?>un sólo carácter)
+				Ej: H:\> DIR C:\USERS\ASIX\VIDEOS\*.avi (nos muestra todos los .avi de la carpeta)
+				Ej2: H:\> DIR C:ASIX\VIDEOS\video?.avi (nos muestra todos los archivos .avi que empiecen por video)
+				Ej3: H:\> DIR C:ASIX\VIDEOS\video?.* (nos muestra todos los archivos que empiecen por video)
+				Ej4: H:\> DIR C:ASIX\VIDEOS\?????1.* (nos muestra todos los archivos que tengan un 1 en su 6to carácter)
+				Ej5: H:\> DIR C:ASIX\VIDEOS\*1.* (nos muestra todos los archivos que tengan un 1 en su último carácter)
+
+
+Borrado de archivos =>
+				DEL [unidad:][ruta]nombrearchivo + RETURN
+				Ej: H:\> DEL C:ASIX\VIDEOS\*1.* (nos elimina todos los archivos que tengan un 1 en su último carácter)
+
+
+Borrado de directorios =>
+				RD [unidad:]ruta + RETURN
+				(para borrar un directorio, no puede ser el directorio activo y éste debe estar vacío. Para borrar un directorio con 				descendencia, primero debemos borrarla con "RD /S [unidad:]ruta". Antiguamente a /S se le apodaba DELTREE)
+
+
+Copiar archivos =>
+				COPY origen destino
+
+			origen  [unidad:][ruta]nombrearchivo
+			destino [unidad:][ruta][nombrearchivo]
+				Ej: H:\> COPY D1\DOC1.txt D1\D11\DOC1.txt
+				Ej2: H:\> COPY D1\D11\*.* D2
+
+
